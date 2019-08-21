@@ -1,0 +1,15 @@
+.container.login-container
+  %h3
+    Login
+  = form_for(:session, url: login_path, class: 'login-form') do |f|
+    .form-group
+      =f.label :enter_email
+      =f.email_field :email, class: 'form-control', placeholder: "Enter Email", type: "email"
+    .form-group
+      =f.label :enter_password
+      =f.email_field :email, class: 'form-control', placeholder: "Enter Password", type: "password"
+    .form-check
+      = f.check_box :remember_me, class: 'form-check-input', placeholder: "Enter Password", type: "checkbox"
+      %label.form-check-label{:for => "exampleCheck1"} Remember Me
+    = f.submit "Log in", class: "btn btn-primary submit-button" 
+    
