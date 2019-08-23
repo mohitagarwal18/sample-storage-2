@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <%= render 'layouts/header'  %>
+    <br />
+    <div class="container">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
+  <script>
+    $(".alert").fadeTo(1000, 250).slideUp(250, function(){
+      $(".alert").slideUp(250);
+    });
+  </script>
   </body>
+  
 </html>

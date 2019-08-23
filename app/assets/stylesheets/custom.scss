@@ -1,14 +1,57 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 .login-container{
   h3{
     text-align: center
   }
-  width: 40%;
-  margin-top: 10%
+  width: 45%;
+  margin-top: 5%
 }
 
+
 .submit-button{
-  margin-left: 40%
+  margin-top: 2%;
+  width: 100%
+}
+.signup-container{
+  h3{
+    text-align: center
+  }
+}
+.signup-form{
+  margin-left: 25%;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+.dashboard-header{
+  overflow: hidden ;
+  margin-bottom: 25px;
+  h3{
+    float: left;
+  }
+  button{
+    float: right;
+  }
+  select{
+    float: right;
+  }
+  
+}
+.picture {
+  margin-top: 10px;
+  input {
+    border: 0;
+  }
+}
+#sort{
+  float: right;
 }

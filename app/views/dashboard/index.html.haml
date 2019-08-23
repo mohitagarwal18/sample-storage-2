@@ -1,0 +1,80 @@
+.dashboard-header
+  %h3
+    ="HI #{@current_user.name}"
+  %button.btn.btn-primary{"data-target" => "#exampleModal", "data-toggle" => "modal", :type => "button"}
+    Upload File
+#sort
+  %form.sort_form{action: dashboard_path}
+    %strong
+      Sort by: 
+    %select{name: "sorting"}
+      %option{value: "created_at-desc"} Date Recent First
+      %option{value: "created_at-asc"} Date Recent Last
+      %option{value: "file_size-desc"} Size Larger First
+      %option{value: "file_size-asc"} Size Smaller First
+%br
+%br
+
+%table.table
+  %caption List of files
+  %thead
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} Name
+      %th{:scope => "col"} Size
+      %th{:scope => "col"} Options
+      %th{:scope => "col"} Created At
+  %tbody
+    
+    -if !@artifacts.blank?
+      - @artifacts.each_with_index do | artifact , index|
+        %tr
+          %th{:scope => "row"}
+            =index + 1
+          %td 
+            =artifact.file_name
+          %td 
+            = "#{artifact.file_size.to_i/ 1.kilobyte} KB"
+          %td 
+            = link_to "Delete", artifact, method: :delete, data: { confirm: "You sure?" }
+            =" | "
+            = link_to "Download", download_path({id: artifact.id}),target: "_blank"
+          %td 
+            =artifact.created_at.in_time_zone("Chennai").strftime("%d-%m-%Y %I:%M:%S %p")
+          
+    - else
+      %tr
+        %th{:colspan=> "4"}
+          = "No Files Found"
+
+= will_paginate @artifacts
+
+#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      =form_for(@artifact) do |f|
+        .modal-header
+          %h5#exampleModalLabel.modal-title Upload File
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body.picture
+          = f.file_field :file
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+          =f.submit "Upload", class: "btn btn-primary"
+
+:javascript
+  
+  
+  $(document).ready(function() { 
+    $('select').on("change", function(){
+      $(".sort_form").submit()
+      
+    })
+    var a  = "#{params[:sorting]}"
+    if (a){
+      $('select').val(a)
+    }
+    
+  
+  });

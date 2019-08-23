@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_21_092801) do
+ActiveRecord::Schema.define(version: 2019_08_22_114719) do
+
+  create_table "artifacts", force: :cascade do |t|
+    t.string "file_location"
+    t.string "file_name"
+    t.integer "file_size"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at", "file_name"], name: "index_artifacts_on_user_id_and_created_at_and_file_name"
+    t.index ["user_id"], name: "index_artifacts_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -18,7 +29,7 @@ ActiveRecord::Schema.define(version: 2019_08_21_092801) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index [nil], name: "index_users_on_email_id", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
