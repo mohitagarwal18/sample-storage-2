@@ -1,0 +1,38 @@
+.container.login-container
+  %h3
+    Login
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-group
+      =f.label :enter_email
+      =f.email_field :email, class: 'form-control', placeholder: "Enter Email", type: "email"
+    .form-group
+      =f.label :enter_password
+      =f.email_field :password, class: 'form-control', placeholder: "Enter Password", type: "password"
+    - if devise_mapping.rememberable?
+      .field
+        = f.check_box :remember_me
+        = f.label :remember_me
+    %p
+    = render "devise/shared/links"
+    = f.submit "Log in", class: "btn btn-primary submit-button" 
+    
+
+
+-# %h2 Log innn
+
+-#   .field
+-#     = f.label :email
+-#     %br/
+-#     = f.email_field :email, autofocus: true, autocomplete: "email"
+-#   .field
+-#     = f.label :password
+-#     %br/
+-#     = f.password_field :password, autocomplete: "current-password"
+-#   - if devise_mapping.rememberable?
+-#     .field
+-#       = f.check_box :remember_me
+-#       = f.label :remember_me
+-#   .actions
+-#     = f.submit "Log in"
+
+
