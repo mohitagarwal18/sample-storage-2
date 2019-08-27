@@ -47,7 +47,7 @@
         %th{:colspan=> "4"}
           = "No Files Found"
 
-= will_paginate @artifacts
+= paginate @artifacts, theme: 'twitter-bootstrap-4'
 
 #exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
