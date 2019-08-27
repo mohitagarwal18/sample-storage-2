@@ -1,14 +1,22 @@
 Rails.application.routes.draw do
   
   devise_for :users
+
+  devise_scope :user do
+    
+    get    '/login',   to: "devise/sessions#new"
+    post    '/login',   to: "devise/sessions#create"
+    get 'signup', to: "devise/registrations#new"
+    delete '/logout', to: "devise/sessions#destroy"
+  end
   
-  get    '/login',   to: 'sessions#new'
-  get    '/signup',   to: 'users#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
   
-  root 'sessions#new'
+  # post   '/login',   to: 'sessions#create'
+  # delete '/logout',  to: 'sessions#destroy'
+  root to: "dashboard#index"
+  
   get '/dashboard' , to: 'dashboard#index'
+  
   resources :users, only: [:new, :create, :edit, :update]
   resources :artifacts,          only: [:create, :destroy]
   get '/search', to: 'dashboard#index'

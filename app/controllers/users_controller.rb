@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
+  # before_action :correct_user,   only: [:edit, :update]
   def new
-    unless logged_in?
+    unless user_signed_in?
       @user  = User.new
     else
       redirect_to '/'
